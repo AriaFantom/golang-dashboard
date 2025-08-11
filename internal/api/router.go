@@ -28,6 +28,7 @@ func NewRouter(dockerClient *docker.Client) *gin.Engine {
 	// Initialize handlers
 	minecraftHandler := handlers.NewMinecraftHandler(dockerClient)
 	pluginHandler := handlers.NewPluginHandler(dockerClient)
+	modHandler := handlers.NewModHandler(dockerClient)
 
 	// API routes
 	v1 := router.Group("/api/v1")
@@ -52,6 +53,12 @@ func NewRouter(dockerClient *docker.Client) *gin.Engine {
 			plugins.GET("/search", pluginHandler.SearchPlugins)                       // Search plugins
 			plugins.GET("/:id/versions", pluginHandler.GetPluginVersions)             // Get plugin versions
 			plugins.POST("/install/:serverID/:pluginID", pluginHandler.InstallPlugin) // Install plugin to server
+		}
+
+		mods := v1.Group("/mods")
+		{
+			// Install a mod from Modrinth into a Fabric/Forge server's /data/mods
+			mods.POST("/install/:serverID/:projectID", modHandler.InstallMod)
 		}
 	}
 
