@@ -57,7 +57,6 @@ func NewRouter(dockerClient *docker.Client) *gin.Engine {
 
 		mods := v1.Group("/mods")
 		{
-			// Install a mod from Modrinth into a Fabric/Forge server's /data/mods
 			mods.POST("/install/:serverID/:projectID", modHandler.InstallMod)
 		}
 	}
