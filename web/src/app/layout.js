@@ -1,7 +1,6 @@
-import { } from "next/font/google";
+import {} from "next/font/google";
 import "./globals.css";
-
-
+import { ThemeProvider } from "@/components/providers/theme-provider";
 
 export const metadata = {
   title: "Create Next App",
@@ -10,12 +9,20 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={` antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+    <>
+      <html>
+        <head />
+        <body className={` bg-background text-foreground antialiased`}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
+    </>
   );
 }
