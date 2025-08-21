@@ -38,7 +38,7 @@ export function Sidebar() {
 
 
   useEffect(() => {
-    const width = isCollapsed ? "4rem" : "16rem"; // matches w-16 and w-64
+    const width = isCollapsed ? "4rem" : "16rem"; 
     if (typeof document !== "undefined") {
       document.documentElement.style.setProperty("--sidebar-width", width);
     }
@@ -81,7 +81,6 @@ export function Sidebar() {
         </Button>
       </div>
 
-      {/* Navigation Items */}
       <nav className="flex-1 p-2">
         <ul className="space-y-1">
           {sidebarItems.map((item) => {
