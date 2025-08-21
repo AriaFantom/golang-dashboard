@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Play, Square, RotateCcw, ArrowLeft } from "lucide-react";
+import { Play, Square, RotateCcw } from "lucide-react";
 
 export function ServerConsole({ serverId, serverName, onBack }) {
   const [consoleOutput, setConsoleOutput] = useState([
@@ -143,10 +143,6 @@ export function ServerConsole({ serverId, serverName, onBack }) {
     <div className=" p-6">
       {/* Header */}
       <div className="mb-6 flex items-center gap-4">
-        <Button variant="outline" size="sm" onClick={onBack}>
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Dashboard
-        </Button>
         <div className="flex items-center gap-2">
           <div className={`w-3 h-3 rounded-full ${getStatusColor()}`} />
           <h1 className="text-2xl font-bold">{serverName} Console</h1>

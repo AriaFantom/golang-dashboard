@@ -1,9 +1,6 @@
-import { ServerConsole } from "@/components/screens/panel/console";
+import { redirect } from "next/navigation";
 
-export default function PanelPage() {
-  return (
-    <section className="flex flex-col mx-20 justify-center min-h-screen">
-      <ServerConsole />
-    </section>
-  );
+export default function PanelPage({ params }) {
+  // Redirect to console by default
+  redirect(`/panel/${params.id}/console`);
 }

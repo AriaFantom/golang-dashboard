@@ -4,6 +4,8 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* Default sidebar width so SSR doesn't cause content jump; updated on client */
+  --sidebar-width: 16rem;
   --background: oklch(0.98 0.0034 145.5497);
   --foreground: oklch(0.2215 0.0071 164.2695);
   --card: oklch(1 0 0);
