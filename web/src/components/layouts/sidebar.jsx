@@ -14,16 +14,20 @@ import {
   Users,
   ChevronLeft,
   ChevronRight,
+  Globe,
+  UserCheck,
 } from "lucide-react";
 
 const sidebarItems = [
   { id: "console", label: "Console", icon: Terminal },
   { id: "config", label: "Server Config", icon: Settings },
   { id: "players", label: "Player List", icon: Users },
+  { id: "worlds", label: "Worlds", icon: Globe },
   { id: "files", label: "File Manager", icon: FolderOpen },
   { id: "mods", label: "Mods", icon: Puzzle },
   { id: "plugins", label: "Plugins", icon: Puzzle },
   { id: "backup", label: "Backup", icon: Archive },
+  { id: "access", label: "Access Management", icon: UserCheck },
 ];
 
 export function Sidebar() {
@@ -36,9 +40,8 @@ export function Sidebar() {
     : "console";
   const serverId = params?.id;
 
-
   useEffect(() => {
-    const width = isCollapsed ? "4rem" : "16rem"; 
+    const width = isCollapsed ? "4rem" : "16rem";
     if (typeof document !== "undefined") {
       document.documentElement.style.setProperty("--sidebar-width", width);
     }
