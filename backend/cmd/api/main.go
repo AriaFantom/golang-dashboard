@@ -1,11 +1,10 @@
 package main
 
 import (
+	"backend/internal/config"
+	"backend/internal/routes"
 	"log"
 	"os"
-
-	"minepanel-backend/internal/config"
-	"minepanel-backend/internal/routes"
 
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/cors"
@@ -33,12 +32,13 @@ func main() {
 	// Middleware
 	app.Use(logger.New())
 	app.Use(cors.New(cors.Config{
-		AllowOrigins: "*",
-		AllowMethods: "GET,POST,HEAD,PUT,DELETE,PATCH",
-		AllowHeaders: "Origin, Content-Type, Accept, Authorization",
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{"GET", "POST", "HEAD", "PUT", "DELETE", "PATCH"},
+		AllowHeaders: []string{"Origin", "Content-Type", "Accept", "Authorization"},
 	}))
 
 	// Setup routes
+
 	routes.Setup(app)
 
 	// Start server
