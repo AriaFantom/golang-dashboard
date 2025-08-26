@@ -11,7 +11,7 @@ A Panel for managing Minecraft servers. It just my personal project may ship to 
 - **World Management**: Backup and restore worlds
 - **Mod/Plugin Management**: Install and manage server modifications
 - **Configuration**: Easy server configuration management
-- **User Authentication**: JWT-based authentication system
+- **User Authentication**: Session-based authentication system
 
 
 ## TODO
