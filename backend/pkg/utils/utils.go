@@ -38,19 +38,17 @@ func Contains(slice []string, item string) bool {
 	return false
 }
 
-// ValidateServerType checks if the server type is valid
 func ValidateServerType(serverType string) bool {
 	validTypes := []string{"vanilla", "bukkit", "spigot", "paper", "forge", "fabric"}
 	return Contains(validTypes, serverType)
 }
 
-// ValidateDifficulty checks if the difficulty is valid
 func ValidateDifficulty(difficulty string) bool {
 	validDifficulties := []string{"peaceful", "easy", "normal", "hard"}
 	return Contains(validDifficulties, difficulty)
 }
 
-// ValidateGamemode checks if the gamemode is valid
+
 func ValidateGamemode(gamemode string) bool {
 	validGamemodes := []string{"survival", "creative", "adventure", "spectator"}
 	return Contains(validGamemodes, gamemode)
