@@ -12,10 +12,8 @@ import (
 )
 
 func main() {
-	// Load configuration
 	cfg := config.Load()
 
-	// Create Fiber app
 	app := fiber.New(fiber.Config{
 		AppName: "MinePanel API",
 		ErrorHandler: func(c fiber.Ctx, err error) error {
@@ -29,7 +27,7 @@ func main() {
 		},
 	})
 
-	// Middleware
+
 	app.Use(logger.New())
 	app.Use(cors.New(cors.Config{
 		AllowOrigins: []string{"*"},

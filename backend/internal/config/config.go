@@ -1,28 +1,57 @@
 package config
 
 import (
+	"log"
 	"os"
+	"strconv"
+	"time"
 )
 
 type Config struct {
-	Port        string
-	DatabaseURL string
-	JWTSecret   string
-	Environment string
+	Addr         string
+	DatabaseURL  string
+	SessionTTL   time.Duration
+	CookieDomain string
+	CookieSecure bool
+	AppEnv       string
+}
+
+func mustEnv(key, def string) string {
+	v := os.Getenv(key)
+	if v == "" {
+		if def != "" {
+			return def
+		}
+		log.Fatalf("ENV not found for the key of - %s", key)
+	}
+	return v
+}
+
+func boolEnv(key string, def bool) bool {
+	v := os.Getenv(key)
+	if v == "" {
+		return def
+	}
+	b, err := strconv.ParseBool(v)
+	if err != nil {
+		return def
+	}
+	return b
 }
 
 func Load() *Config {
+	ttl := time.Hour * 24 * 7
+	if v := os.Getenv("SESSION_TTL_HOURS"); v != "" {
+		if n, err := strconv.Atoi(v); err == nil && n > 0 {
+			ttl = time.Duration(n) * time.Hour
+		}
+	}
 	return &Config{
-		Port:        getEnv("PORT", "8080"),
-		DatabaseURL: getEnv("DATABASE_URL", "sqlite://./minepanel.db"),
-		JWTSecret:   getEnv("JWT_SECRET", "your-secret-key"),
-		Environment: getEnv("ENVIRONMENT", "development"),
+		Addr:         mustEnv("ADDR", ":8080"),
+		DatabaseURL:  mustEnv("DATABASE_URL", ""),
+		SessionTTL:   ttl,
+		CookieDomain: os.Getenv("COOKIE_DOMAIN"),
+		CookieSecure: boolEnv("COOKIE_SECURE", false),
+		AppEnv:       os.Getenv("APP_ENV"),
 	}
-}
-
-func getEnv(key, defaultValue string) string {
-	if value := os.Getenv(key); value != "" {
-		return value
-	}
-	return defaultValue
 }
