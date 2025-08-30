@@ -27,7 +27,6 @@ func main() {
 		},
 	})
 
-
 	app.Use(logger.New())
 	app.Use(cors.New(cors.Config{
 		AllowOrigins: []string{"*"},
@@ -42,7 +41,7 @@ func main() {
 	// Start server
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = cfg.Port
+		port = cfg.Addr
 	}
 
 	log.Printf("🚀 Server starting on port %s", port)
