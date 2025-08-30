@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: minepanel-postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=minepanel
+      - POSTGRES_USER=minepanel
+      - POSTGRES_PASSWORD=change-me
+      - TZ=UTC
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U minepanel -d minepanel -h 127.0.0.1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pg_data:

@@ -10,7 +10,7 @@ PORT ?= 3000
 NODE_ENV ?= production
 NPM := npm
 
-.PHONY: install dev
+.PHONY: install dev db-up db-down db-logs db-status db-psql
 
 
 install:
@@ -18,3 +18,7 @@ install:
 
 dev:
 	cd $(WEB_DIR) && $(NPM) run dev
+
+# --- Postgres (Docker Compose) helpers ---
+compose-up:
+	cd $(DEPLOY_DIR) && docker compose up -d
